@@ -40,6 +40,6 @@ public class MovieRepository {
 	 * 			})
 	 */
 	public Comment insertComment(Comment comment){
-		return template.insert(comment, "comments");
+		return template.insert(comment);
 	}
 }

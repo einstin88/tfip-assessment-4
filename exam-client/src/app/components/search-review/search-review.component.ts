@@ -5,7 +5,6 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-review',

@@ -37,7 +37,6 @@ public class Utils {
                     try {
                         JsonObject multimedia = movie.getJsonObject("multimedia");
                         review.setImage(multimedia.getString("src"));
-
                     } catch (ClassCastException e) {
                         review.setImage("");
                     }

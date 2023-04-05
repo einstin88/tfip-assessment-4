@@ -6,8 +6,8 @@ import { PostCommentComponent } from './components/post-comment/post-comment.com
 
 const routes: Routes = [
   { path: 'view0', component: SearchReviewComponent, title: 'Movie Search' },
-  { path: 'view1', component: MovieReviewListComponent, title: 'Search Result' },
-  { path: 'view2/:movieName', component: PostCommentComponent, title: 'Comment on Movie' },
+  { path: 'view1', component: MovieReviewListComponent },
+  { path: 'view2/:movieName', component: PostCommentComponent },
   { path: '', redirectTo: '/view0', pathMatch: 'full' },
   { path: '**', redirectTo: '/view0', pathMatch: 'full' },
 ];

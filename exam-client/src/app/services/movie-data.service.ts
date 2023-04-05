@@ -26,14 +26,11 @@ export class MovieDataService {
   /**
    * Convert form's data to params format to be sent as url encoded form
    */
-  postNewReview({ movieName, name, rating, comment }: Comment) {
+  // postNewReview({ movieName, name, rating, comment }: Comment) {
+  postNewReview(comment: Comment) {
     const url = `${this.#URL_API}/comment`;
 
-    const newComment = new HttpParams()
-      .set('movieName', movieName)
-      .set('name', name)
-      .set('rating', rating)
-      .set('comment', comment);
+    const newComment = new HttpParams().appendAll({...comment})
 
     const headers = new HttpHeaders().set(
       'Content-Type',
@@ -41,7 +38,7 @@ export class MovieDataService {
     );
 
     return firstValueFrom(
-      this.http.post(url, newComment.toString(), { headers })
-    ).catch((err) => console.error('Failed to save new post'));
+      this.http.post<void>(url, newComment.toString(), { headers })
+    ).catch(() => console.error('Failed to save new post'));
   }
 }

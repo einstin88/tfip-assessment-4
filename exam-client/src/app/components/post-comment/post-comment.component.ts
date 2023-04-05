@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { MovieDataService } from 'src/app/services/movie-data.service';
 
 import { Comment } from 'src/app/models/comment.model';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-post-comment',
@@ -16,7 +16,8 @@ export class PostCommentComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
-    private svc: MovieDataService
+    private svc: MovieDataService,
+    private title: Title
   ) {}
 
   movieName!: string;
@@ -24,6 +25,7 @@ export class PostCommentComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.movieName = this.route.snapshot.params['movieName'] as string;
+    this.title.setTitle(`Comment: ${this.movieName}`)
 
     this.commentForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
@@ -48,8 +50,8 @@ export class PostCommentComponent implements OnInit, OnDestroy {
   }
 
   // Navigate back to result page (view 1)
-  backToResultPage() {
-    const queryParams = { query: localStorage.getItem('movieName') };
+  async backToResultPage() {
+    const queryParams = { query: await localStorage.getItem('movieName') };
     // console.log('Query was: ', query);
 
     this.router.navigate(['/view1'], { queryParams });

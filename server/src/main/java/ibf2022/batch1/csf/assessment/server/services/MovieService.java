@@ -1,7 +1,7 @@
 package ibf2022.batch1.csf.assessment.server.services;
 
 import java.net.URI;
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.List;
 
 import org.bson.types.ObjectId;
@@ -73,10 +73,10 @@ public class MovieService {
 
 		} catch (RestClientException e) {
 			log.error("--- Error calling NYT API");
-			return new LinkedList<>();
+			return Collections.emptyList();
 		} catch (ClassCastException e) {
 			log.info("--- No results");
-			return new LinkedList<>();
+			return Collections.emptyList();
 		}
 	}
 

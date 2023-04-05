@@ -54,10 +54,10 @@ public class MovieController {
 
 		if (svc.insertComment(formData)) {
 			log.info(">>> New comment saved:");
-			return ResponseEntity.ok().build();
+			return ResponseEntity.created(null).build();
 		}
 
-		log.info("--- Error saving new comment");
+		log.error("--- Error saving new comment");
 		return ResponseEntity.internalServerError().build();
 	}
 }
