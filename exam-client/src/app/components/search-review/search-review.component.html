@@ -5,6 +5,9 @@
     <td>
       <input type="text" [formControl]="query" />
     </td>
+    <td *ngIf="checkSpaces()" class="error">
+      Leading and trailing blank spaces are not accepted
+    </td>
   </tr>
   <tr>
     <td></td>
@@ -18,5 +21,6 @@
         Search
       </button>
     </td>
+    <td></td>
   </tr>
 </table>

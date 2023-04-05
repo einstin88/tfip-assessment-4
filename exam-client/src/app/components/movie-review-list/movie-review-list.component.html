@@ -1,11 +1,21 @@
-<h1>Search Result</h1>
-<ng-container *ngIf="reviews.length > 0; else emptyMsg">
+<div >
+  <h1 >Search Result</h1>
+  <button
+    type="button"
+    [routerLink]="['/view0']"
+  >
+    Back
+  </button>
+</div>
+<br>
+<hr>
+<div *ngIf="reviews.length > 0; else emptyMsg">
   <table *ngFor="let review of reviews">
     <tr>
       <td>Title:</td>
       <td>
         <a [href]="review.reviewURL" target="_blank">
-          {{ review.title }} | {{ review.rating }}
+          {{ review.title }} | {{ review.rating ? review.rating : 'no-rating' }}
         </a>
       </td>
     </tr>
@@ -43,5 +53,5 @@
       <td><hr /></td>
     </tr>
   </table>
-</ng-container>
+</div>
 <ng-template #emptyMsg> <h2>Your search produces no result</h2> </ng-template>

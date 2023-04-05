@@ -26,6 +26,11 @@ public class MovieController {
 	private MovieService svc;
 
 	// Task 3, Task 4
+	/*
+	 * Endpoint 1: 
+	 * Return a list of movie reviews from NYT's API. Will return empty list 
+	 * if query has errors
+	 */
 	@GetMapping(path = "/search")
 	public ResponseEntity<List<Review>> getMovieList(
 			@RequestParam(required = true) String query) {
@@ -38,6 +43,10 @@ public class MovieController {
 	}
 
 	// Task 8
+	/*
+	 * Endpoint 2:
+	 * Saves new comment into the DB. Return (500) if failed
+	 */
 	@PostMapping(path = "/comment", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public ResponseEntity<Void> postNewComment(
 			Comment formData) {

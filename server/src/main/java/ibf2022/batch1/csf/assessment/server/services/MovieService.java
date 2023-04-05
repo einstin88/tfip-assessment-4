@@ -38,6 +38,12 @@ public class MovieService {
 
 	// Task 4
 	// DO NOT CHANGE THE METHOD'S SIGNATURE
+	/*
+	 * - Builds URL for API call to NYT's Movie Review API
+	 * - Attempt to parse the response from API call
+	 * - If successful, return a list of 'Review'
+	 * - If failed or no result, return empty list 
+	 */
 	public List<Review> searchReviews(String query) {
 		URI url = UriComponentsBuilder
 				.fromHttpUrl(URL_NYT)
@@ -54,7 +60,9 @@ public class MovieService {
 		try {
 			response = client.exchange(request, String.class);
 			// log.info(">>> Response: " + response.getBody());
-			return Utils.createMovieList(response.getBody()).stream()
+
+			// Adds the comment count before returning to controller
+			return Utils.createMovieList(response.getBody())
 					.map(review -> {
 						review.setCommentCount(
 								repo.countComments(review.getTitle()));
@@ -64,16 +72,17 @@ public class MovieService {
 					.toList();
 
 		} catch (RestClientException e) {
-			log.info("--- Error calling NYT API");
+			log.error("--- Error calling NYT API");
+			return new LinkedList<>();
+		} catch (ClassCastException e) {
+			log.info("--- No results");
 			return new LinkedList<>();
 		}
 	}
 
-	public int getReviewCount(String movieName) {
-		return repo.countComments(movieName);
-	}
-
+	// Middleman function
 	public Boolean insertComment(Comment comment) {
-		return ObjectId.isValid(repo.insertComment(comment).id());
+		return ObjectId.isValid(
+			repo.insertComment(comment).id());
 	}
 }

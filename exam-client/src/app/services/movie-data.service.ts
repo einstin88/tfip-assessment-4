@@ -12,6 +12,9 @@ export class MovieDataService {
 
   #URL_API = '/api';
 
+  /* 
+    Request list of movies based on 'query'
+  */
   getReviewList(movieName: string) {
     const url = `${this.#URL_API}/search`;
 
@@ -20,6 +23,9 @@ export class MovieDataService {
     return this.http.get<Review[]>(url, { params });
   }
 
+  /**
+   * Convert form's data to params format to be sent as url encoded form
+   */
   postNewReview({ movieName, name, rating, comment }: Comment) {
     const url = `${this.#URL_API}/comment`;
 
@@ -34,7 +40,6 @@ export class MovieDataService {
       'application/x-www-form-urlencoded'
     );
 
-    // return this.http.post(url, formData);
     return firstValueFrom(
       this.http.post(url, newComment.toString(), { headers })
     ).catch((err) => console.error('Failed to save new post'));

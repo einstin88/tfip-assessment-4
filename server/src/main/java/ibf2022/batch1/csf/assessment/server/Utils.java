@@ -1,7 +1,7 @@
 package ibf2022.batch1.csf.assessment.server;
 
 import java.io.StringReader;
-import java.util.List;
+import java.util.stream.Stream;
 
 import ibf2022.batch1.csf.assessment.server.models.Review;
 import jakarta.json.Json;
@@ -10,8 +10,12 @@ import jakarta.json.JsonObject;
 import jakarta.json.JsonValue;
 
 public class Utils {
-    public static List<Review> createMovieList(String response) {
 
+    /*
+     * Helper function to parse response string to List of Review
+     * Note: errors are handles by caller of this function
+     */
+    public static Stream<Review> createMovieList(String response) {
         JsonArray parsed = Json.createReader(new StringReader(response))
                 .readObject()
                 .getJsonArray("results");
@@ -29,6 +33,7 @@ public class Utils {
                     JsonObject link = movie.getJsonObject("link");
                     review.setReviewURL(link.getString("url"));
 
+                    // Image's URL may be null
                     try {
                         JsonObject multimedia = movie.getJsonObject("multimedia");
                         review.setImage(multimedia.getString("src"));
@@ -38,7 +43,6 @@ public class Utils {
                     }
 
                     return review;
-                })
-                .toList();
+                });
     }
 }

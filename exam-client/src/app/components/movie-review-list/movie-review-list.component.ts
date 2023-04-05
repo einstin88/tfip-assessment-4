@@ -17,8 +17,8 @@ export class MovieReviewListComponent implements OnInit {
 
   ngOnInit(): void {
     const movieName = this.route.snapshot.queryParams['query'] as string;
-    localStorage.setItem("movieName", movieName)
-    console.info('Query movies: ', movieName);
+    localStorage.setItem("movieName", movieName) // To help user navigate back to result page from view 2
+    // console.info('Query movies: ', movieName);
 
     this.sub$ = this.svc.getReviewList(movieName).subscribe((reviews) => {
       this.reviews = reviews;

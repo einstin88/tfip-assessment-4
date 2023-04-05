@@ -36,6 +36,7 @@ export class PostCommentComponent implements OnInit, OnDestroy {
     this.commentForm.reset();
   }
 
+  // Handles form submission
   processForm() {
     const formData = this.commentForm.value as Comment;
     formData.movieName = this.movieName;
@@ -46,6 +47,7 @@ export class PostCommentComponent implements OnInit, OnDestroy {
     this.backToResultPage();
   }
 
+  // Navigate back to result page (view 1)
   backToResultPage() {
     const queryParams = { query: localStorage.getItem('movieName') };
     // console.log('Query was: ', query);
