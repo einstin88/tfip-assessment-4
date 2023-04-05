@@ -1,0 +1,22 @@
+<h1>Search Movie Reviews</h1>
+<table>
+  <tr>
+    <td>Movie Name:</td>
+    <td>
+      <input type="text" [formControl]="query" />
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>
+      <button
+        type="submit"
+        [disabled]="query.invalid"
+        [routerLink]="['/view1']"
+        [queryParams]="{ query: query.value }"
+      >
+        Search
+      </button>
+    </td>
+  </tr>
+</table>

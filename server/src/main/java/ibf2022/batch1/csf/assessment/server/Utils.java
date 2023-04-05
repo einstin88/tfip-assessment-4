@@ -1,0 +1,44 @@
+package ibf2022.batch1.csf.assessment.server;
+
+import java.io.StringReader;
+import java.util.List;
+
+import ibf2022.batch1.csf.assessment.server.models.Review;
+import jakarta.json.Json;
+import jakarta.json.JsonArray;
+import jakarta.json.JsonObject;
+import jakarta.json.JsonValue;
+
+public class Utils {
+    public static List<Review> createMovieList(String response) {
+
+        JsonArray parsed = Json.createReader(new StringReader(response))
+                .readObject()
+                .getJsonArray("results");
+
+        return parsed.stream()
+                .map(JsonValue::asJsonObject)
+                .map(movie -> {
+                    Review review = new Review();
+                    review.setTitle(movie.getString("display_title"));
+                    review.setRating(movie.getString("mpaa_rating"));
+                    review.setByline(movie.getString("byline"));
+                    review.setHeadline(movie.getString("headline"));
+                    review.setSummary(movie.getString("summary_short"));
+
+                    JsonObject link = movie.getJsonObject("link");
+                    review.setReviewURL(link.getString("url"));
+
+                    try {
+                        JsonObject multimedia = movie.getJsonObject("multimedia");
+                        review.setImage(multimedia.getString("src"));
+
+                    } catch (ClassCastException e) {
+                        review.setImage("");
+                    }
+
+                    return review;
+                })
+                .toList();
+    }
+}

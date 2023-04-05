@@ -1,0 +1,42 @@
+<h1>Search Result</h1>
+<ng-container *ngIf="reviews.length > 0; else emptyMsg">
+  <table *ngFor="let review of reviews">
+    <tr>
+      <td>Title:</td>
+      <td>{{ review.title }}</td>
+    </tr>
+    <tr>
+      <td>Rating:</td>
+      <td>{{ review.rating }}</td>
+    </tr>
+    <tr>
+      <td>Headline:</td>
+      <td>{{ review.headline }}</td>
+    </tr>
+    <tr>
+      <td>Summary:</td>
+      <td>{{ review.summary }}</td>
+    </tr>
+    <tr>
+      <td>Comments:</td>
+      <td>{{ review.commentCount }}</td>
+    </tr>
+    <tr>
+      <td>URL:</td>
+      <td>{{ review.reviewURL }}</td>
+    </tr>
+    <tr>
+      <td>Image:</td>
+      <td><img [src]="review.image" alt="" /></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><button>Comment</button></td>
+    </tr>
+    <tr>
+      <td><hr /></td>
+      <td><hr /></td>
+    </tr>
+  </table>
+</ng-container>
+<ng-template #emptyMsg> <h2>Your search produces no result</h2> </ng-template>

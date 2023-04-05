@@ -1,0 +1,47 @@
+{
+  "status": "OK",
+  "copyright": "Copyright (c) 2023 The New York Times Company. All Rights Reserved.",
+  "has_more": false,
+  "num_results": 2,
+  "results": [
+    {
+      "display_title": "Avatar: The Way of Water",
+      "mpaa_rating": "PG-13",
+      "critics_pick": 0,
+      "byline": "A.O. Scott",
+      "headline": "ΓÇÿAvatar: The Way of WaterΓÇÖ Review: Big Blue Marvel",
+      "summary_short": "James Cameron returns to Pandora, and to the ecological themes and visual bedazzlements of his 2009 blockbuster.",
+      "publication_date": "2022-12-14",
+      "opening_date": "2022-12-16",
+      "date_updated": "2022-12-14 21:38:03",
+      "link": {
+        "type": "article",
+        "url": "https://www.nytimes.com/2022/12/14/movies/avatar-the-way-of-water-review.html",
+        "suggested_link_text": "Read the New York Times Review of Avatar: The Way of Water"
+      },
+      "multimedia": {
+        "type": "mediumThreeByTwo210",
+        "src": "https://static01.nyt.com/images/2022/12/14/multimedia/14avatar1-1-6cf3/14avatar1-1-6cf3-mediumThreeByTwo440-v3.jpg",
+        "height": 140,
+        "width": 210
+      }
+    },
+    {
+      "display_title": "Avatar",
+      "mpaa_rating": "PG-13",
+      "critics_pick": 1,
+      "byline": "MANOHLA DARGIS",
+      "headline": "A New Eden, Both Cosmic and Cinematic",
+      "summary_short": "With ΓÇ£AvatarΓÇ¥ James Cameron has turned one manΓÇÖs dream of the movies into a trippy joy ride about the end of life as we know it.",
+      "publication_date": "2009-12-17",
+      "opening_date": "2009-12-18",
+      "date_updated": "2017-11-02 04:18:10",
+      "link": {
+        "type": "article",
+        "url": "https://www.nytimes.com/2009/12/18/movies/18avatar.html",
+        "suggested_link_text": "Read the New York Times Review of Avatar"
+      },
+      "multimedia": null
+    }
+  ]
+}
