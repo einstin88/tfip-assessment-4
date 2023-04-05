@@ -7,6 +7,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import ibf2022.batch1.csf.assessment.server.models.Comment;
+
 @Repository
 public class MovieRepository {
 	@Autowired
@@ -23,8 +25,11 @@ public class MovieRepository {
 		return (int) template.count(query, Document.class, "comments");
 	}
 
-	// TODO: Task 8
+	// Task 8
 	// Write a method to insert movie comments comments collection
 	// Write the native mongo database query in the comment below
 	//
+	public Comment insertComment(Comment comment){
+		return template.insert(comment, "comments");
+	}
 }

@@ -1,1 +1,32 @@
-<h1>Post Comment for xx</h1>
+<h1>Post Comment for {{ movieName }}</h1>
+<form [formGroup]="commentForm" (ngSubmit)="processForm()">
+  <p>
+    <b>
+      <em>All fields are mandatory</em>
+    </b>
+  </p>
+  <table>
+    <tr>
+      <td>Name:</td>
+      <td><input type="text" formControlName="name" /></td>
+    </tr>
+    <tr>
+      <td>Rating:</td>
+      <td><input type="number" step="1" formControlName="rating" /></td>
+    </tr>
+    <tr>
+      <td>Comments:</td>
+      <td>
+        <textarea cols="30" rows="10" formControlName="comment"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <button type="button" (click)="backToResultPage()">Back</button>
+      </td>
+      <td>
+        <button type="submit" [disabled]="commentForm.invalid">Post</button>
+      </td>
+    </tr>
+  </table>
+</form>

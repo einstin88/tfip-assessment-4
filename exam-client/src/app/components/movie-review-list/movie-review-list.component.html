@@ -3,11 +3,11 @@
   <table *ngFor="let review of reviews">
     <tr>
       <td>Title:</td>
-      <td>{{ review.title }}</td>
-    </tr>
-    <tr>
-      <td>Rating:</td>
-      <td>{{ review.rating }}</td>
+      <td>
+        <a [href]="review.reviewURL" target="_blank">
+          {{ review.title }} | {{ review.rating }}
+        </a>
+      </td>
     </tr>
     <tr>
       <td>Headline:</td>
@@ -22,16 +22,21 @@
       <td>{{ review.commentCount }}</td>
     </tr>
     <tr>
-      <td>URL:</td>
-      <td>{{ review.reviewURL }}</td>
-    </tr>
-    <tr>
       <td>Image:</td>
-      <td><img [src]="review.image" alt="" /></td>
+      <td>
+        <img
+          [src]="review.image ? review.image : '/assets/placeholder.jpg'"
+          alt=""
+        />
+      </td>
     </tr>
     <tr>
       <td></td>
-      <td><button>Comment</button></td>
+      <td>
+        <button type="button" [routerLink]="['/view2', review.title]">
+          Comment
+        </button>
+      </td>
     </tr>
     <tr>
       <td><hr /></td>

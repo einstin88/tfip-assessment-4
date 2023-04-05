@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import ibf2022.batch1.csf.assessment.server.Utils;
+import ibf2022.batch1.csf.assessment.server.models.Comment;
 import ibf2022.batch1.csf.assessment.server.models.Review;
 import ibf2022.batch1.csf.assessment.server.repositories.MovieRepository;
 
@@ -33,9 +35,6 @@ public class MovieService {
 
 	@Autowired
 	private MovieRepository repo;
-
-	// @Value("${NYT_PRIV}")
-	// private String priv_key;
 
 	// Task 4
 	// DO NOT CHANGE THE METHOD'S SIGNATURE
@@ -55,16 +54,26 @@ public class MovieService {
 		try {
 			response = client.exchange(request, String.class);
 			// log.info(">>> Response: " + response.getBody());
-			return Utils.createMovieList(response.getBody());
-			
+			return Utils.createMovieList(response.getBody()).stream()
+					.map(review -> {
+						review.setCommentCount(
+								repo.countComments(review.getTitle()));
+
+						return review;
+					})
+					.toList();
+
 		} catch (RestClientException e) {
 			log.info("--- Error calling NYT API");
 			return new LinkedList<>();
 		}
 	}
 
-	public int getReviewCount(String movieName){
+	public int getReviewCount(String movieName) {
 		return repo.countComments(movieName);
 	}
 
+	public Boolean insertComment(Comment comment) {
+		return ObjectId.isValid(repo.insertComment(comment).id());
+	}
 }
