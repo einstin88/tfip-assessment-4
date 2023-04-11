@@ -13,7 +13,7 @@ public class Utils {
 
     /*
      * Helper function to parse response string to List of Review
-     * Note: errors are handles by caller of this function
+     * Note: errors are handled by caller of this function
      */
     public static Stream<Review> createMovieList(String response) {
         JsonArray parsed = Json.createReader(new StringReader(response))

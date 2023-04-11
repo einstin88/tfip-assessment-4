@@ -40,8 +40,8 @@ export class PostCommentComponent implements OnInit, OnDestroy {
 
   // Handles form submission
   processForm() {
-    const formData = this.commentForm.value as Comment;
-    formData.movieName = this.movieName;
+    const formData = {...this.commentForm.value, movieName: this.movieName} as Comment;
+    // formData.movieName = this.movieName;
     // console.log('Form to submit: ', JSON.stringify(formData));
 
     this.svc.postNewReview(formData);
@@ -50,8 +50,8 @@ export class PostCommentComponent implements OnInit, OnDestroy {
   }
 
   // Navigate back to result page (view 1)
-  async backToResultPage() {
-    const queryParams = { query: await localStorage.getItem('movieName') };
+  backToResultPage() {
+    const queryParams = { query: localStorage.getItem('movieName') };
     // console.log('Query was: ', query);
 
     this.router.navigate(['/view1'], { queryParams });

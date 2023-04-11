@@ -35,7 +35,7 @@
       <td>Image:</td>
       <td>
         <img
-          [src]="review.image ? review.image : '/assets/placeholder.jpg'"
+          [src]="review.image || '/assets/placeholder.jpg'"
           alt=""
         />
       </td>
@@ -54,4 +54,4 @@
     </tr>
   </table>
 </div>
-<ng-template #emptyMsg> <h2>Your search produces no result</h2> </ng-template>
+<ng-template #emptyMsg> <h2>{{ loadingMsg }}</h2> </ng-template>

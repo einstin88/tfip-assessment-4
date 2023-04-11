@@ -19,15 +19,19 @@ export class MovieReviewListComponent implements OnInit, OnDestroy {
 
   sub$!: Subscription;
   reviews: Review[] = [];
+  loadingMsg!: string
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     const movieName = this.route.snapshot.queryParams['query'] as string;
-    await localStorage.setItem('movieName', movieName); // To help user navigate back to result page from view 2
+    localStorage.setItem('movieName', movieName); // To help user navigate back to result page from view 2
     // console.info('Query movies: ', movieName);
     this.title.setTitle(`Result for: ${movieName}`);
 
+    this.loadingMsg = 'Fetching movie list...'
     this.sub$ = this.svc.getReviewList(movieName).subscribe((reviews) => {
       this.reviews = reviews;
+      if (reviews.length == 0)
+        this.loadingMsg = 'Your search produces no result'
     });
   }
 
